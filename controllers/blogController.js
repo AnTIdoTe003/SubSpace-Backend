@@ -1,13 +1,22 @@
-import _ from 'lodash';
+const lodash = require('lodash');
 
-export const showBlogs = async (req, res) => {
+exports.showBlogs = async function(req, res) {
     try {
         const blogs = req.blog.blogs;
         const totalBlogs = blogs.length;
-        // console.log(totalBlogs)
-        const blogWithLongestTitle = _.maxBy(blogs, blog => blog.title.length);
-        const uniqueBlogTitles = _.uniqBy(blogs, 'title').map(blog => blog.title);
-        const blogsWithPrivacy = _.filter(blogs, blog => _.includes(blog.title.toLowerCase(), 'privacy'));
+
+        const blogWithLongestTitle = lodash.maxBy(blogs, function(blog) {
+            return blog.title.length;
+        });
+
+        const uniqueBlogTitles = lodash.uniqBy(blogs, 'title').map(function(blog) {
+            return blog.title;
+        });
+
+        const blogsWithPrivacy = lodash.filter(blogs, function(blog) {
+            return lodash.includes(blog.title.toLowerCase(), 'privacy');
+        });
+
         return res.status(200).json({
             success: true,
             message: "Blogs fetched successfully",
@@ -24,16 +33,14 @@ export const showBlogs = async (req, res) => {
     }
 };
 
-
-export const searchBlogs = async (req,res)=>{
-    try{
-        const {blogs} = req.blog;
+exports.searchBlogs = async function(req, res) {
+    try {
+        const blogs = req.blog.blogs;
         const query = req.query.query || '';
 
-
-        const searchResults = blogs.filter(blog =>
-            blog.title.toLowerCase().includes(query.toLowerCase())
-        );
+        const searchResults = blogs.filter(function(blog) {
+            return blog.title.toLowerCase().includes(query.toLowerCase());
+        });
 
         return res.status(200).json({
             success: true,
@@ -41,10 +48,10 @@ export const searchBlogs = async (req,res)=>{
             query,
             results: searchResults,
         });
-    }catch (error){
+    } catch (error) {
         return res.status(400).json({
             success: false,
             message: error.message,
         });
     }
-}
+};

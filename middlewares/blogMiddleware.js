@@ -1,7 +1,7 @@
-import axios from "axios";
-import _ from 'lodash';
+const axios = require("axios");
+const lodash = require('lodash');
 
-export const getBlogs = _.memoize(async (req, res, next) => {
+const getBlogs = lodash.memoize(async (req, res, next) => {
     try {
         const config = {
             headers: { 'x-hasura-admin-secret': '32qR4KmXOIpsGPQKMqEJHGJS27G5s7HdSKO3gdtQd2kv5e852SiYwWNfxkZOBuQ6' }
@@ -16,3 +16,5 @@ export const getBlogs = _.memoize(async (req, res, next) => {
         });
     }
 });
+
+module.exports = { getBlogs };
