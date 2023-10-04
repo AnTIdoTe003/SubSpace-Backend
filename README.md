@@ -40,9 +40,9 @@ curl -X GET http://localhost:5000/api/blog-stats
 - **Controller:** `searchBlogs`
 - **Query Parameters:**
 
-    | Parameter Name | Values                    | Description                               |
-        |--------|---------------------------|-------------------------------------------|
-    | `query`| `privacy` | `gives the blog output based on the given query which matches with the blog title`
+    | Parameter Name | Values  | Description                               |
+    | -------------- | ------- | ----------------------------------------- |
+    | `query`        | `privacy`| Gives the blog output based on the given query which matches with the blog title |
 
 ### Description
 Search the blog according to the query
@@ -50,6 +50,3 @@ Search the blog according to the query
 ### Example
 ```bash
 curl -X GET http://localhost:5000/api/blog-search?query=privacy
-```
-
-
